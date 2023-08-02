@@ -26,6 +26,11 @@ public class DistributedConfig {
     RedissonNode redissonNode(BeanFactory beanFactory) {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+        /**
+         * Config config = new Config();
+         *         ClusterServersConfig clusterServersConfig = config.useClusterServers().addNodeAddress("redis://demo.redis.com:6379")
+         *                 .setReadMode(ReadMode.MASTER);
+         */
         RedissonNodeConfig nodeConfig = new RedissonNodeConfig(config);
         nodeConfig.setExecutorServiceWorkers(Collections.singletonMap(DistributedDispatcherJob.class.getName(), 1));
         nodeConfig.setBeanFactory(beanFactory);
@@ -38,6 +43,11 @@ public class DistributedConfig {
     RedissonClient redisson() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+/**
+ * Config config = new Config();
+ *         ClusterServersConfig clusterServersConfig = config.useClusterServers().addNodeAddress("redis://demo.redis.com:6379")
+ *                 .setReadMode(ReadMode.MASTER);
+ */
         return Redisson.create(config);
     }
 
